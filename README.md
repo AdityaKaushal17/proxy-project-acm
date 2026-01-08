@@ -43,12 +43,18 @@ No external dependencies (uses Python standard library)
 python3 proxy_server.py
 Expected output:
 [INFO] Proxy server listening on 127.0.0.1:8888
+
+
 🧪 Testing the Proxy
+
+
 Basic HTTP Test
 curl -x http://localhost:8888 http://example.org
 
+
 HEAD Request
 curl -x http://localhost:8888 -I http://example.org
+
 
 Blocking Test
 Add example.org to blocked_domains.txt and run:
@@ -56,25 +62,39 @@ curl -x http://localhost:8888 http://example.org
 Expected response:
 HTTP/1.1 403 Forbidden
 
+
 Concurrent Requests Test
 for i in {1..10}; do
   curl -x http://localhost:8888 http://example.org &
 done
 wait
 
+
 -- Request Flow (Data Path)
 Client
+  
   ↓
+
 TCP Connection
+  
   ↓
+
 HTTP Request Parsing
+ 
   ↓
 Filtering (Domain/IP)
+ 
   ├── Blocked → 403 Forbidden
   └── Allowed
+       
         ↓
+   
    Forward Request to Server
+      
         ↓
+  
    Stream Response Back
+     
         ↓
+      
        Logging
