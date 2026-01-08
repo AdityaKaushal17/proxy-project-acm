@@ -4,6 +4,8 @@ A custom-built HTTP forward proxy server implemented in Python, designed to demo
 This project was built as a systems / networking project, focusing on correctness, modularity, and extensibility rather than relying on existing proxy libraries.
 
 -- Features
+
+
 ✅ TCP-based HTTP proxy server
 ✅ Concurrent handling of multiple clients (thread pool)
 ✅ HTTP request parsing (method, host, headers, body)
@@ -18,6 +20,8 @@ Caching
 Authentication
 
 -- Project Structure
+
+
 proxy-project/
 ├── proxy_server.py        # Main proxy server (entry point)
 ├── http_parser.py         # HTTP request parsing logic
