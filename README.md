@@ -23,19 +23,33 @@ Authentication
 
 
 proxy-project/
+
 ├── proxy_server.py        # Main proxy server (entry point)
+
 ├── http_parser.py         # HTTP request parsing logic
+
 ├── filter_manager.py     # Domain/IP filtering logic
+
 ├── config_loader.py      # Loads JSON-based configuration
+
 ├── logger.py              # Logging utilities
+
 ├── web_interface.py      # Optional monitoring / interface layer
+
 │
+
 ├── config/
+
 │   ├── proxy_config.json # Server configuration
+
 │   └── blocked_domains.txt
+
 │
+
 ├── logs/
+
 │   └── proxy.log          # Generated at runtime
+
 │
 ├── README.md
 
