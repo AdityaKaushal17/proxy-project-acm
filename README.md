@@ -36,7 +36,6 @@ proxy-project/
 
 ├── web_interface.py      # Optional monitoring / interface layer
 
-│
 
 ├── config/
 
@@ -44,7 +43,6 @@ proxy-project/
 
 │   └── blocked_domains.txt
 
-│
 
 ├── logs/
 
