@@ -39,16 +39,15 @@ proxy-project/
 
 ├── config/
 
-│   ├── proxy_config.json # Server configuration
+   ├── proxy_config.json # Server configuration
 
-│   └── blocked_domains.txt
+   └── blocked_domains.txt
 
 
 ├── logs/
 
-│   └── proxy.log          # Generated at runtime
+   └── proxy.log          # Generated at runtime
 
-│
 ├── README.md
 
 🚀 How to Run
