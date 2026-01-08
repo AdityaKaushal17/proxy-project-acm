@@ -69,56 +69,8 @@ for i in {1..10}; do
 done
 wait
 
-Client
-  |
-  |  (HTTP request via proxy)
-  v
-+---------------------+
-|  Proxy Server       |
-|  (TCP Listener)     |
-+---------------------+
-          |
-          v
-+---------------------+
-|  Request Parsing    |
-|  - Method           |
-|  - URL / Path       |
-|  - Headers          |
-|  - Host             |
-+---------------------+
-          |
-          v
-+---------------------+
-|  Filtering Layer    |
-|  - Domain/IP check  |
-+---------------------+
-      |           |
-      |           |
-  Blocked        Allowed
-      |           |
-      v           v
-+----------------+   +----------------------+
-| 403 Forbidden  |   | Forward to Server    |
-| (send to client)|  | (TCP connect)        |
-+----------------+   +----------------------+
-                          |
-                          v
-                 +----------------------+
-                 | Destination Server   |
-                 +----------------------+
-                          |
-                          v
-                 +----------------------+
-                 | Stream Response Back |
-                 +----------------------+
-                          |
-                          v
-                 +----------------------+
-                 | Logging              |
-                 | - status             |
-                 | - bytes              |
-                 | - action             |
-                 +----------------------+
-                          |
-                          v
-                       Client
+-- Concurrency Model
+Uses a thread pool
+Each client connection is handled by a worker thread
+Prevents uncontrolled thread creation
+Suitable for moderate concurrent load and demonstration purposes
