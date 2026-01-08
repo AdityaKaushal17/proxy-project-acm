@@ -69,32 +69,56 @@ for i in {1..10}; do
 done
 wait
 
-
--- Request Flow (Data Path)
 Client
-  
-  ↓
-
-TCP Connection
-  
-  ↓
-
-HTTP Request Parsing
- 
-  ↓
-Filtering (Domain/IP)
- 
-  ├── Blocked → 403 Forbidden
-  └── Allowed
-       
-        ↓
-   
-   Forward Request to Server
-      
-        ↓
-  
-   Stream Response Back
-     
-        ↓
-      
-       Logging
+  |
+  |  (HTTP request via proxy)
+  v
++---------------------+
+|  Proxy Server       |
+|  (TCP Listener)     |
++---------------------+
+          |
+          v
++---------------------+
+|  Request Parsing    |
+|  - Method           |
+|  - URL / Path       |
+|  - Headers          |
+|  - Host             |
++---------------------+
+          |
+          v
++---------------------+
+|  Filtering Layer    |
+|  - Domain/IP check  |
++---------------------+
+      |           |
+      |           |
+  Blocked        Allowed
+      |           |
+      v           v
++----------------+   +----------------------+
+| 403 Forbidden  |   | Forward to Server    |
+| (send to client)|  | (TCP connect)        |
++----------------+   +----------------------+
+                          |
+                          v
+                 +----------------------+
+                 | Destination Server   |
+                 +----------------------+
+                          |
+                          v
+                 +----------------------+
+                 | Stream Response Back |
+                 +----------------------+
+                          |
+                          v
+                 +----------------------+
+                 | Logging              |
+                 | - status             |
+                 | - bytes              |
+                 | - action             |
+                 +----------------------+
+                          |
+                          v
+                       Client
